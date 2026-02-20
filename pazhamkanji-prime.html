@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<center><title>Pazhamkanji Prime</title></head>center>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Crimson+Pro:wght@300;400;600&family=Noto+Serif+Malayalam&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --clay: #C4622D;
+    --turmeric: #E8A020;
+    --leaf: #3D6B35;
+    --cream: #FAF3E0;
+    --dark: #1A1008;
+    --smoke: #6B5B47;
+    --ancient-bg: #3D1F0A;
+    --medieval-bg: #1A2E1A;
+    --modern-bg: #0D1B2A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    font-family: 'Crimson Pro', serif;
+    color: var(--dark);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--dark);
+    padding: 24px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(196,98,45,0.05) 10px,
+      rgba(196,98,45,0.05) 20px
+    );
+  }
+  .logo {
+    position: relative;
+    z-index: 1;
+  }
+  .logo h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--turmeric);
+    letter-spacing: -0.5px;
+    line-height: 1;
+  }
+  .logo span {
+    display: block;
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.85rem;
+    color: var(--clay);
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .logo-icon {
+    font-size: 2.5rem;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 0 12px rgba(232,160,32,0.5));
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--dark) 0%, #2D1505 50%, var(--ancient-bg) 100%);
+    padding: 60px 40px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '🌿';
+    position: absolute;
+    font-size: 200px;
+    opacity: 0.04;
+    top: -20px;
+    right: -30px;
+    transform: rotate(15deg);
+  }
+  .hero h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--turmeric);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 400;
+    font-style: italic;
+  }
+  .hero p {
+    color: rgba(250,243,224,0.7);
+    font-size: 1.1rem;
+    max-width: 560px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+
+  /* UPLOAD ZONE */
+  .upload-container {
+    max-width: 680px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .food-input-area {
+    background: rgba(250,243,224,0.05);
+    border: 2px dashed rgba(196,98,45,0.5);
+    border-radius: 16px;
+    padding: 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+  }
+  .food-input-area:hover {
+    border-color: var(--turmeric);
+    background: rgba(232,160,32,0.08);
+  }
+  .food-input-area.dragover {
+    border-color: var(--turmeric);
+    background: rgba(232,160,32,0.12);
+    transform: scale(1.01);
+  }
+  .upload-icon {
+    font-size: 3rem;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .food-input-area h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--cream);
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+  }
+  .food-input-area p {
+    color: rgba(250,243,224,0.5);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+  }
+  #fileInput { display: none; }
+
+  .text-input-section {
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+  }
+  .food-tag-input {
+    flex: 1;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(196,98,45,0.3);
+    border-radius: 10px;
+    padding: 14px 18px;
+    color: var(--cream);
+    font-family: 'Crimson Pro', serif;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  .food-tag-input:focus {
+    border-color: var(--turmeric);
+  }
+  .food-tag-input::placeholder { color: rgba(250,243,224,0.35); }
+
+  .add-btn {
+    background: var(--clay);
+    color: var(--cream);
+    border: none;
+    border-radius: 10px;
+    padding: 14px 24px;
+    font-family: 'Crimson Pro', serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+  }
+  .add-btn:hover { background: var(--turmeric); color: var(--dark); }
+
+  .food-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+    min-height: 36px;
+  }
+  .food-tag {
+    background: rgba(196,98,45,0.25);
+    border: 1px solid rgba(196,98,45,0.5);
+    color: var(--turmeric);
+    border-radius: 999px;
+    padding: 6px 14px 6px 16px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: tagIn 0.25s ease;
+  }
+  @keyframes tagIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .food-tag button {
+    background: none;
+    border: none;
+    color: rgba(232,160,32,0.6);
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    padding: 0;
+    transition: color 0.2s;
+  }
+  .food-tag button:hover { color: #ff6b6b; }
+
+  .preview-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .preview-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid rgba(196,98,45,0.4);
+  }
+
+  .generate-btn {
+    width: 100%;
+    margin-top: 24px;
+    background: linear-gradient(135deg, var(--clay), var(--turmeric));
+    color: var(--dark);
+    border: none;
+    border-radius: 12px;
+    padding: 18px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+  }
+  .generate-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.15));
+  }
+  .generate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(196,98,45,0.4);
+  }
+  .generate-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* ERA TABS */
+  .era-section {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 60px 24px;
+  }
+  .era-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    text-align: center;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+  .era-section > p {
+    text-align: center;
+    color: var(--smoke);
+    margin-bottom: 36px;
+    font-size: 1.05rem;
+  }
+
+  .tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.12);
+    margin-bottom: 32px;
+  }
+  .tab-btn {
+    padding: 20px 16px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    transition: all 0.35s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .tab-btn .tab-icon { font-size: 1.8rem; }
+  .tab-btn .tab-label { letter-spacing: 1px; }
+  .tab-btn .tab-sub { font-family: 'Crimson Pro', serif; font-size: 0.75rem; font-weight: 300; letter-spacing: 1px; opacity: 0.7; }
+
+  .tab-btn[data-era="ancient"] {
+    background: linear-gradient(135deg, #5C2D0A, #8B3A0F);
+    color: #F5C87A;
+  }
+  .tab-btn[data-era="ancient"].active {
+    background: linear-gradient(135deg, var(--clay), #E8651A);
+    color: var(--dark);
+    box-shadow: inset 0 -4px 0 rgba(0,0,0,0.2);
+  }
+  .tab-btn[data-era="medieval"] {
+    background: linear-gradient(135deg, #1A3A1A, #2D5A1E);
+    color: #8FD685;
+    border-left: 1px solid rgba(255,255,255,0.05);
+    border-right: 1px solid rgba(255,255,255,0.05);
+  }
+  .tab-btn[data-era="medieval"].active {
+    background: linear-gradient(135deg, var(--leaf), #5A9E50);
+    color: var(--cream);
+    box-shadow: inset 0 -4px 0 rgba(0,0,0,0.2);
+  }
+  .tab-btn[data-era="modern"] {
+    background: linear-gradient(135deg, #0A1A2E, #0F2847);
+    color: #7EC8E3;
+  }
+  .tab-btn[data-era="modern"].active {
+    background: linear-gradient(135deg, #1A5276, #2E86C1);
+    color: var(--cream);
+    box-shadow: inset 0 -4px 0 rgba(0,0,0,0.2);
+  }
+
+  /* RECIPE CARDS */
+  .recipes-container {
+    min-height: 200px;
+    position: relative;
+  }
+  .era-panel { display: none; }
+  .era-panel.active { display: block; animation: fadeIn 0.4s ease; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 60px 24px;
+    color: var(--smoke);
+  }
+  .empty-state .empty-icon { font-size: 4rem; display: block; margin-bottom: 16px; opacity: 0.5; }
+  .empty-state h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 8px; color: var(--dark); }
+  .empty-state p { font-size: 1rem; }
+
+  .recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 24px;
+  }
+
+  .recipe-card {
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: cardIn 0.5s ease backwards;
+    cursor: pointer;
+  }
+  .recipe-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(0,0,0,0.2);
+  }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Ancient card */
+  .ancient .recipe-card {
+    background: linear-gradient(160deg, #3D1F0A, #5C2E10);
+    border: 1px solid rgba(196,98,45,0.3);
+  }
+  .medieval .recipe-card {
+    background: linear-gradient(160deg, #1A2E1A, #253D25);
+    border: 1px solid rgba(61,107,53,0.4);
+  }
+  .modern .recipe-card {
+    background: linear-gradient(160deg, #0D1B2A, #152540);
+    border: 1px solid rgba(46,134,193,0.3);
+  }
+
+  .card-header {
+    padding: 24px 24px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .card-emoji { font-size: 2.5rem; line-height: 1; }
+  .card-badge {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+  .ancient .card-badge { background: rgba(196,98,45,0.2); color: var(--turmeric); border: 1px solid rgba(196,98,45,0.3); }
+  .medieval .card-badge { background: rgba(61,107,53,0.2); color: #8FD685; border: 1px solid rgba(61,107,53,0.3); }
+  .modern .card-badge { background: rgba(46,134,193,0.15); color: #7EC8E3; border: 1px solid rgba(46,134,193,0.3); }
+
+  .card-body { padding: 0 24px 24px; }
+  .card-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .ancient .card-body h3 { color: #F5C87A; }
+  .medieval .card-body h3 { color: #C8EDBA; }
+  .modern .card-body h3 { color: #B8DCEE; }
+
+  .card-body p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    opacity: 0.75;
+    margin-bottom: 16px;
+  }
+  .ancient .card-body p { color: #F0D5AE; }
+  .medieval .card-body p { color: #C5E8B8; }
+  .modern .card-body p { color: #A8CCE8; }
+
+  .card-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .meta-tag {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8rem;
+    opacity: 0.65;
+  }
+  .ancient .meta-tag { color: var(--turmeric); }
+  .medieval .meta-tag { color: #8FD685; }
+  .modern .meta-tag { color: #7EC8E3; }
+
+  .card-steps {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 16px 24px 24px;
+    display: none;
+  }
+  .card-steps.open { display: block; }
+  .card-steps h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+  .ancient .card-steps h4 { color: var(--turmeric); }
+  .medieval .card-steps h4 { color: #8FD685; }
+  .modern .card-steps h4 { color: #7EC8E3; }
+
+  .step-list { list-style: none; }
+  .step-list li {
+    display: flex;
+    gap: 12px;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+  .ancient .step-list li { color: #F0D5AE; }
+  .medieval .step-list li { color: #C5E8B8; }
+  .modern .step-list li { color: #A8CCE8; }
+
+  .step-num {
+    min-width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .ancient .step-num { background: rgba(196,98,45,0.3); color: var(--turmeric); }
+  .medieval .step-num { background: rgba(61,107,53,0.3); color: #8FD685; }
+  .modern .step-num { background: rgba(46,134,193,0.2); color: #7EC8E3; }
+
+  /* LOADING */
+  .loading-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26,16,8,0.85);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    backdrop-filter: blur(4px);
+  }
+  .loading-overlay.show { display: flex; }
+  .loading-pot {
+    font-size: 4rem;
+    animation: pot-bounce 0.8s ease-in-out infinite alternate;
+  }
+  @keyframes pot-bounce {
+    from { transform: translateY(0) rotate(-5deg); }
+    to { transform: translateY(-12px) rotate(5deg); }
+  }
+  .loading-overlay p {
+    color: var(--cream);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+  .loading-dots {
+    display: flex;
+    gap: 8px;
+  }
+  .loading-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--turmeric);
+    animation: dot-bounce 1s ease-in-out infinite;
+  }
+  .loading-dots span:nth-child(2) { animation-delay: 0.15s; }
+  .loading-dots span:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes dot-bounce {
+    0%, 100% { transform: translateY(0); opacity: 0.4; }
+    50% { transform: translateY(-8px); opacity: 1; }
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    padding: 24px 40px;
+    text-align: center;
+    color: rgba(250,243,224,0.3);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+  footer span { color: var(--clay); }
+
+  /* DECORATIVE DIVIDER */
+  .divider {
+    text-align: center;
+    padding: 8px 0;
+    color: var(--turmeric);
+    opacity: 0.3;
+    font-size: 1.2rem;
+    letter-spacing: 16px;
+  }
+
+  @media (max-width: 640px) {
+    header { padding: 16px 20px; }
+    .logo h1 { font-size: 1.6rem; }
+    .hero { padding: 40px 20px 32px; }
+    .tabs { grid-template-columns: 1fr; }
+    .recipe-grid { grid-template-columns: 1fr; }
+    .era-section { padding: 40px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <center><h1>Pazhamkanji Prime</h1>
+    <span>Wasteless Kitchen · Ancient Wisdom</span></center>
+  </div>
+  <div class="logo-icon">🍲</div>
+</header>
+
+<div class="hero">
+  <h2>Don't waste, recreate</h2>
+  <p>Upload your leftover ingredients — half a carrot, yesterday's rice, a lonely onion — and discover recipes spanning thousands of years of culinary wisdom.</p>
+
+  <div class="upload-container">
+    <div class="food-input-area" id="dropZone" onclick="document.getElementById('fileInput').click()">
+      <span class="upload-icon">📷</span>
+      <h3>Drop or click to add food photos</h3>
+      <p>Upload images of your leftover ingredients</p>
+      <input type="file" id="fileInput" accept="image/*" multiple onchange="handleFiles(event)">
+    </div>
+
+    <div class="preview-images" id="previewImages"></div>
+
+    <div class="text-input-section">
+      <input type="text" class="food-tag-input" id="foodInput" placeholder="Type ingredient (e.g. half carrot, leftover rice...)" onkeydown="if(event.key==='Enter') addFoodTag()">
+      <button class="add-btn" onclick="addFoodTag()">+ Add</button>
+    </div>
+
+    <div class="food-tags" id="foodTags"></div>
+
+    <button class="generate-btn" id="generateBtn" onclick="generateRecipes()" disabled>
+      🔥 Discover Recipes Across Eras
+    </button>
+  </div>
+</div>
+
+<div class="divider">✦ ✦ ✦</div>
+
+<section class="era-section">
+  <h2>Choose Your Era</h2>
+  <p>Every era cooked with what they had. Find your recipe in time.</p>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-era="ancient" onclick="switchTab('ancient')">
+      <span class="tab-icon">🏺</span>
+      <span class="tab-label">Ancient</span>
+      <span class="tab-sub">Before 500 CE</span>
+    </button>
+    <button class="tab-btn" data-era="medieval" onclick="switchTab('medieval')">
+      <span class="tab-icon">🏰</span>
+      <span class="tab-label">Medieval</span>
+      <span class="tab-sub">500–1500 CE</span>
+    </button>
+    <button class="tab-btn" data-era="modern" onclick="switchTab('modern')">
+      <span class="tab-icon">⚗️</span>
+      <span class="tab-label">Modern</span>
+      <span class="tab-sub">Today's Kitchen</span>
+    </button>
+  </div>
+
+  <div class="recipes-container">
+    <div class="era-panel ancient active" id="panel-ancient">
+      <div class="empty-state">
+        <span class="empty-icon">🏺</span>
+        <h3>Ancient Recipes Await</h3>
+        <p>Add your leftover ingredients above and discover how ancient civilizations would have cooked them.</p>
+      </div>
+    </div>
+    <div class="era-panel medieval" id="panel-medieval">
+      <div class="empty-state">
+        <span class="empty-icon">🏰</span>
+        <h3>Medieval Recipes Await</h3>
+        <p>Add your leftover ingredients above and uncover the culinary secrets of the medieval world.</p>
+      </div>
+    </div>
+    <div class="era-panel modern" id="panel-modern">
+      <div class="empty-state">
+        <span class="empty-icon">⚗️</span>
+        <h3>Modern Recipes Await</h3>
+        <p>Add your leftover ingredients above and explore contemporary, creative ways to use them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Pazhamkanji Prime &mdash; Because every leftover holds a <span>story worth tasting</span></p>
+  <p>@2026 &mdash; Pazhamkanji Prime.developed by <span>Annmary Cyriac</span></p>
+</footer>
+
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-pot">🍲</div>
+  <p>Stirring through centuries of recipes...</p>
+  <div class="loading-dots">
+    <span></span><span></span><span></span>
+  </div>
+</div>
+
+<script>
+  let foodItems = [];
+  let uploadedImages = [];
+  let activeEra = 'ancient';
+  let generatedRecipes = null;
+
+  // DRAG AND DROP
+  const dropZone = document.getElementById('dropZone');
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.classList.remove('dragover');
+    handleFiles({ target: { files: e.dataTransfer.files } });
+  });
+
+  function handleFiles(event) {
+    const files = Array.from(event.target.files);
+    files.forEach(file => {
+      if (!file.type.startsWith('image/')) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        uploadedImages.push({ name: file.name, data: e.target.result });
+        // Extract ingredient name from filename
+        const name = file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
+        if (!foodItems.includes(name)) {
+          foodItems.push(name);
+          renderTags();
+        }
+        renderPreviews();
+        updateGenerateBtn();
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function renderPreviews() {
+    const container = document.getElementById('previewImages');
+    container.innerHTML = uploadedImages.map(img =>
+      `<img class="preview-img" src="${img.data}" alt="${img.name}" title="${img.name}">`
+    ).join('');
+  }
+
+  function addFoodTag() {
+    const input = document.getElementById('foodInput');
+    const val = input.value.trim();
+    if (!val) return;
+    if (!foodItems.includes(val)) {
+      foodItems.push(val);
+      renderTags();
+      updateGenerateBtn();
+    }
+    input.value = '';
+    input.focus();
+  }
+
+  function removeTag(idx) {
+    foodItems.splice(idx, 1);
+    renderTags();
+    updateGenerateBtn();
+  }
+
+  function renderTags() {
+    const container = document.getElementById('foodTags');
+    container.innerHTML = foodItems.map((item, i) =>
+      `<div class="food-tag">🌿 ${item} <button onclick="removeTag(${i})">×</button></div>`
+    ).join('');
+  }
+
+  function updateGenerateBtn() {
+    const btn = document.getElementById('generateBtn');
+    btn.disabled = foodItems.length === 0;
+  }
+
+  function switchTab(era) {
+    activeEra = era;
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`.tab-btn[data-era="${era}"]`).classList.add('active');
+    document.querySelectorAll('.era-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById(`panel-${era}`).classList.add('active');
+  }
+
+  async function generateRecipes() {
+    if (foodItems.length === 0) return;
+
+    document.getElementById('loadingOverlay').classList.add('show');
+
+    // Simulate AI call with a timeout, then use built-in recipe generation
+    await new Promise(r => setTimeout(r, 2200));
+
+    generatedRecipes = generateLocalRecipes(foodItems);
+    renderAllEras(generatedRecipes);
+
+    document.getElementById('loadingOverlay').classList.remove('show');
+    document.querySelector('.era-section').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function generateLocalRecipes(items) {
+    const itemStr = items.join(', ');
+    const mainItem = items[0];
+
+    return {
+      ancient: [
+        {
+          emoji: '🏺',
+          name: `${capitalize(mainItem)} Pongal of the Ancients`,
+          badge: 'Vedic Kitchen',
+          desc: `A sacred preparation rooted in Sangam-era traditions. ${itemStr} simmered with hand-pounded rice in clay pots over firewood, seasoned with black pepper and ghee — an offering before a meal.`,
+          time: '45 min',
+          difficulty: 'Simple',
+          yield: '2 servings',
+          steps: [
+            `Wash ${mainItem} and any grains thoroughly in river-clean water.`,
+            `Heat a clay pot on a wood fire and add a spoon of aged ghee.`,
+            `Add crushed pepper seeds and dried ginger, let them crackle.`,
+            `Add ${itemStr} with twice the water. Cover with a banana leaf lid.`,
+            `Cook slowly until soft and mushy. Season with rock salt.`,
+            `Offer to the fire first, then serve in banana leaf.`
+          ]
+        },
+        {
+          emoji: '🌿',
+          name: `Keerai Kolambu with ${capitalize(mainItem)}`,
+          badge: 'Tamil Nadu · 300 BCE',
+          desc: `Ancient Tamil households wasted nothing. This tangy tamarind kolambu uses ${itemStr} to create a soul-warming broth thickened with lentils, echoing recipes from Sangam poetry.`,
+          time: '35 min',
+          difficulty: 'Easy',
+          yield: '3 servings',
+          steps: [
+            `Soak tamarind the size of a lemon in warm water for 15 minutes.`,
+            `Temper mustard seeds and dried red chillies in sesame oil.`,
+            `Add ${mainItem} chopped coarsely. Sauté for 5 minutes.`,
+            `Pour in tamarind water, add remaining ${items.slice(1).join(', ')} if any.`,
+            `Stir in cooked toor dal. Simmer 20 minutes until thick.`,
+            `Finish with fresh curry leaves and a pinch of asafoetida.`
+          ]
+        },
+        {
+          emoji: '🫙',
+          name: `${capitalize(mainItem)} Pickle (Oorugai)`,
+          badge: 'Preservation · Ancient',
+          desc: `Before refrigerators, ancient cooks preserved everything. This salt-and-oil cure transforms ${itemStr} into a tangy, shelf-stable pickle using only sunlight, salt, and mustard.`,
+          time: '10 min + 3 days',
+          difficulty: 'Easy',
+          yield: 'Jar full',
+          steps: [
+            `Cut ${mainItem} into small pieces. Pat completely dry.`,
+            `Mix with rock salt (3 tsp per cup), turmeric, and chilli powder.`,
+            `Add remaining items: ${items.slice(1).join(', ')}.`,
+            `Pack into a clay jar. Pour sesame oil to cover everything.`,
+            `Cover with cloth and leave in sunlight for 3 days.`,
+            `Stir daily. The pickle is ready when sourness develops.`
+          ]
+        }
+      ],
+      medieval: [
+        {
+          emoji: '🏰',
+          name: `Nawabi ${capitalize(mainItem)} Shorba`,
+          badge: 'Mughal Courts · 1200 CE',
+          desc: `In the royal kitchens of medieval Deccan, ${itemStr} was slowly simmered with whole spices to make a fragrant, thin broth served before elaborate feasts — a dish of elegant restraint.`,
+          time: '50 min',
+          difficulty: 'Medium',
+          yield: '4 servings',
+          steps: [
+            `Char a whole onion directly on flame until black outside, sweet inside.`,
+            `In a wide handi, bloom cardamom, cinnamon stick, and cloves in ghee.`,
+            `Add charred onion paste and sauté until oil separates.`,
+            `Add ${itemStr} and coat in spices. Add 4 cups of water.`,
+            `Simmer covered on low heat for 40 minutes.`,
+            `Strain through muslin, season with rosewater and serve hot.`
+          ]
+        },
+        {
+          emoji: '🫕',
+          name: `Kerala Ishtew with ${capitalize(mainItem)}`,
+          badge: 'Trade Era · 900 CE',
+          desc: `When Arab traders brought coconut cultivation to Kerala's spice coast, medieval cooks created this golden stew. ${itemStr} simmers in coconut milk with black pepper — a remnant of the spice trade.`,
+          time: '40 min',
+          difficulty: 'Easy',
+          yield: '3 servings',
+          steps: [
+            `Heat coconut oil and add sliced shallots, green chillies, ginger.`,
+            `Sauté until golden. Add ${mainItem} and stir for 3 minutes.`,
+            `Pour in thin coconut milk (first extract). Add salt and pepper.`,
+            `Add remaining ingredients: ${items.slice(1).join(', ')}.`,
+            `Cook until vegetables are tender, about 20 minutes.`,
+            `Finish with thick coconut milk, simmer 2 more minutes. Do not boil.`
+          ]
+        },
+        {
+          emoji: '🍃',
+          name: `Haleem-style ${capitalize(mainItem)} Pottage`,
+          badge: 'Sultanate · 1300 CE',
+          desc: `Slow-cooked for hours, this hearty pottage from the medieval Bahmani Sultanate uses ${itemStr} with cracked wheat. Comfort food that fed soldiers and scholars alike.`,
+          time: '90 min',
+          difficulty: 'Medium',
+          yield: '4 servings',
+          steps: [
+            `Soak cracked wheat or broken rice overnight. Drain.`,
+            `In a deep pot, fry onions golden in ghee. Add ginger-garlic paste.`,
+            `Add ${itemStr} and cook on high for 5 minutes.`,
+            `Add soaked grain, water (6 cups), and all spices.`,
+            `Cook on very low heat for 60–75 minutes, stirring occasionally.`,
+            `Beat with wooden spoon until creamy. Top with fried onions.`
+          ]
+        }
+      ],
+      modern: [
+        {
+          emoji: '⚗️',
+          name: `${capitalize(mainItem)} Stir-Fry Bowl`,
+          badge: 'Modern Fusion',
+          desc: `A quick, high-heat wok technique that rescues ${itemStr} in under 15 minutes. Finished with a tangy soy-tamarind glaze and sesame seeds for crunch — perfect weeknight anti-waste cooking.`,
+          time: '15 min',
+          difficulty: 'Easy',
+          yield: '2 servings',
+          steps: [
+            `Prep all ingredients: chop ${itemStr} into uniform bite-sized pieces.`,
+            `Make sauce: 2 tbsp soy sauce, 1 tbsp tamarind paste, 1 tsp honey, 1 tsp sesame oil.`,
+            `Heat wok or wide pan until smoking. Add 2 tbsp oil.`,
+            `Add ${mainItem} first. Stir-fry on high without stirring for 90 seconds.`,
+            `Add remaining items, pour sauce in. Toss everything 2 minutes.`,
+            `Serve over rice or noodles. Top with sesame seeds and spring onions.`
+          ]
+        },
+        {
+          emoji: '🫙',
+          name: `${capitalize(mainItem)} Overnight Ferment`,
+          badge: 'Gut-Health · Contemporary',
+          desc: `Inspired by both Korean kimchi and South Indian fermentation wisdom, this overnight probiotic preparation transforms ${itemStr} into a tangy, gut-healthy condiment ready by morning.`,
+          time: '10 min + overnight',
+          difficulty: 'Easy',
+          yield: 'One jar',
+          steps: [
+            `Julienne or thinly slice ${mainItem} and all other items (${items.slice(1).join(', ')}).`,
+            `Make brine: 1 cup water + 1 tsp salt (non-iodized). Stir to dissolve.`,
+            `Pack vegetables tightly in a clean glass jar.`,
+            `Pour brine over, ensuring everything is submerged. Add a weight.`,
+            `Cover loosely and leave at room temperature 8–12 hours.`,
+            `Taste — should be pleasantly sour. Refrigerate and use within 2 weeks.`
+          ]
+        },
+        {
+          emoji: '🔥',
+          name: `Air-Fryer ${capitalize(mainItem)} Chips`,
+          badge: 'Zero-Waste · 2024',
+          desc: `Turn wilting ${mainItem} into irresistibly crispy chips with zero oil waste. This modern technique coaxes out natural sugars with intense dry heat — a guilty-free snack from forgotten ingredients.`,
+          time: '20 min',
+          difficulty: 'Very Easy',
+          yield: '2 snack servings',
+          steps: [
+            `Slice ${mainItem} paper-thin using a mandoline or sharp knife.`,
+            `Toss with 1 tsp olive oil, salt, chilli flakes, and any other spices.`,
+            `Arrange in single layer in air fryer basket — no overlap.`,
+            `Air fry at 160°C for 8 minutes. Flip each chip carefully.`,
+            `Continue at 160°C for 5–7 more minutes until golden and crisp.`,
+            `Let cool 5 minutes — they crisp further as they cool. Serve immediately.`
+          ]
+        }
+      ]
+    };
+  }
+
+  function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  function renderAllEras(recipes) {
+    ['ancient', 'medieval', 'modern'].forEach(era => {
+      const panel = document.getElementById(`panel-${era}`);
+      const cards = recipes[era];
+      panel.className = `era-panel ${era} ${era === activeEra ? 'active' : ''}`;
+      panel.innerHTML = `<div class="recipe-grid">${cards.map((card, i) => renderCard(card, era, i)).join('')}</div>`;
+    });
+  }
+
+  function renderCard(card, era, idx) {
+    const delay = idx * 0.1;
+    return `
+    <div class="recipe-card" style="animation-delay: ${delay}s" onclick="toggleSteps(this)">
+      <div class="card-header">
+        <span class="card-emoji">${card.emoji}</span>
+        <span class="card-badge">${card.badge}</span>
+      </div>
+      <div class="card-body">
+        <h3>${card.name}</h3>
+        <p>${card.desc}</p>
+        <div class="card-meta">
+          <span class="meta-tag">⏱ ${card.time}</span>
+          <span class="meta-tag">📊 ${card.difficulty}</span>
+          <span class="meta-tag">🍽 ${card.yield}</span>
+        </div>
+      </div>
+      <div class="card-steps" id="steps-${era}-${idx}">
+        <h4>How to Cook</h4>
+        <ol class="step-list">
+          ${card.steps.map((step, si) => `
+            <li>
+              <span class="step-num">${si + 1}</span>
+              <span>${step}</span>
+            </li>
+          `).join('')}
+        </ol>
+      </div>
+    </div>`;
+  }
+
+  function toggleSteps(card) {
+    const steps = card.querySelector('.card-steps');
+    steps.classList.toggle('open');
+  }
+</script>
+</body>
+</html>

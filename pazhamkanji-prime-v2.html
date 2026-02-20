@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pazhamkanji Prime 🔥</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800;900&family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+
+[data-theme="dark"] {
+  --bg: #0E0A06;
+  --bg2: #1A1208;
+  --bg3: #241A0E;
+  --surface: #2C1F10;
+  --surface2: #3A2818;
+  --border: rgba(196,112,40,0.18);
+  --text: #F5EDD8;
+  --text2: #A89070;
+  --text3: #6B5A42;
+  --accent: #E8920A;
+  --accent2: #C4562A;
+  --accent3: #4CAF50;
+  --glow: rgba(232,146,10,0.25);
+  --card-bg: linear-gradient(145deg, #2C1F10, #1E1509);
+  --tab-ancient: #8B3A0A;
+  --tab-medieval: #1A3A2A;
+  --tab-modern: #0A1E3A;
+}
+
+[data-theme="light"] {
+  --bg: #FDF6E8;
+  --bg2: #F5EAD0;
+  --bg3: #EDD8B0;
+  --surface: #F0E0C0;
+  --surface2: #E8D0A8;
+  --border: rgba(140,80,20,0.2);
+  --text: #2A1A08;
+  --text2: #6B4A20;
+  --text3: #A07040;
+  --accent: #C4720A;
+  --accent2: #9B3010;
+  --accent3: #2E7D32;
+  --glow: rgba(196,114,10,0.2);
+  --card-bg: linear-gradient(145deg, #F5E8D0, #EDD8B8);
+  --tab-ancient: #D4844A;
+  --tab-medieval: #5A9A6A;
+  --tab-modern: #4A80B4;
+}
+
+body {
+  font-family: 'Lora', serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background var(--transition), color var(--transition);
+  overflow-x: hidden;
+}
+
+/* NOISE TEXTURE */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* HEADER */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(12px);
+  transition: background var(--transition);
+}
+
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.logo-pot {
+  font-size: 2rem;
+  animation: float 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px var(--glow));
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+.logo-text {
+  font-family: 'Syne', sans-serif;
+  font-weight: 900;
+  font-size: 1.35rem;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.logo-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--text3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: block;
+  margin-top: 1px;
+}
+
+/* THEME TOGGLE */
+.theme-toggle {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  width: 56px;
+  height: 28px;
+  cursor: pointer;
+  position: relative;
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  flex-shrink: 0;
+}
+.toggle-ball {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent);
+  transition: transform var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  box-shadow: 0 2px 8px var(--glow);
+}
+[data-theme="light"] .toggle-ball {
+  transform: translateX(28px);
+}
+.theme-toggle:hover .toggle-ball {
+  box-shadow: 0 0 12px var(--glow), 0 0 24px var(--glow);
+}
+
+/* HERO */
+.hero {
+  padding: 64px 32px 48px;
+  text-align: center;
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  animation: slideDown 0.6s ease backwards;
+}
+.hero-badge span { font-size: 0.9rem; animation: spin 4s linear infinite; display: inline-block; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -2px;
+  margin-bottom: 20px;
+  animation: slideDown 0.7s ease 0.1s backwards;
+}
+.hero h1 .fire { color: var(--accent); }
+.hero h1 .chill { color: var(--text); }
+
+.hero p {
+  font-size: 1.1rem;
+  color: var(--text2);
+  max-width: 540px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+  font-style: italic;
+  animation: slideDown 0.8s ease 0.2s backwards;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ERA TABS */
+.era-tabs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 40px;
+  animation: slideDown 0.8s ease 0.3s backwards;
+  flex-wrap: wrap;
+}
+.era-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 24px;
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: 'Syne', sans-serif;
+  position: relative;
+  overflow: hidden;
+  min-width: 130px;
+}
+.era-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.era-btn[data-era="ancient"]::before { background: linear-gradient(135deg, rgba(139,58,10,0.4), rgba(196,86,42,0.3)); }
+.era-btn[data-era="medieval"]::before { background: linear-gradient(135deg, rgba(26,58,42,0.4), rgba(76,175,80,0.2)); }
+.era-btn[data-era="modern"]::before { background: linear-gradient(135deg, rgba(10,30,58,0.4), rgba(33,150,243,0.2)); }
+
+.era-btn.active::before { opacity: 1; }
+.era-btn.active {
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--glow);
+}
+.era-btn[data-era="ancient"].active { border-color: rgba(196,86,42,0.5); }
+.era-btn[data-era="medieval"].active { border-color: rgba(76,175,80,0.4); }
+.era-btn[data-era="modern"].active { border-color: rgba(33,150,243,0.4); }
+
+.era-icon { font-size: 1.8rem; position: relative; z-index: 1; }
+.era-name { font-size: 0.95rem; font-weight: 800; color: var(--text); position: relative; z-index: 1; }
+.era-period { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--text3); letter-spacing: 1px; position: relative; z-index: 1; }
+.era-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px var(--glow); }
+.era-btn.active:hover { transform: translateY(-4px); }
+
+/* INGREDIENT PANEL */
+.input-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 32px;
+  max-width: 760px;
+  margin: 0 auto 40px;
+  animation: slideDown 0.9s ease 0.4s backwards;
+  transition: background var(--transition);
+}
+
+.input-card h3 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* DROP ZONE */
+.drop-zone {
+  border: 2px dashed var(--border);
+  border-radius: 16px;
+  padding: 32px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: 20px;
+  position: relative;
+  background: var(--bg2);
+}
+.drop-zone:hover, .drop-zone.drag-over {
+  border-color: var(--accent);
+  background: rgba(232,146,10,0.06);
+}
+.drop-zone input { display: none; }
+.dz-icon { font-size: 2.5rem; margin-bottom: 10px; display: block; }
+.dz-text { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--text2); }
+.dz-sub { font-size: 0.8rem; color: var(--text3); margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
+
+.img-previews {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.img-preview {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 72px;
+  height: 72px;
+}
+.img-preview img { width: 100%; height: 100%; object-fit: cover; }
+.img-preview button {
+  position: absolute;
+  top: 2px; right: 2px;
+  background: rgba(0,0,0,0.7);
+  border: none;
+  border-radius: 50%;
+  width: 20px; height: 20px;
+  color: white;
+  cursor: pointer;
+  font-size: 0.65rem;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* TEXT INPUT */
+.ingredient-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.ing-input {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  color: var(--text);
+  font-family: 'Lora', serif;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.3s;
+}
+.ing-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--glow); }
+.ing-input::placeholder { color: var(--text3); font-style: italic; }
+
+.add-btn {
+  background: var(--accent2);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+.add-btn:hover { background: var(--accent); transform: translateY(-1px); }
+
+.tags-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+  min-height: 28px;
+}
+.tag {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--accent);
+  border-radius: 999px;
+  padding: 5px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  animation: tagPop 0.2s ease;
+}
+@keyframes tagPop {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.tag button { background: none; border: none; color: var(--text3); cursor: pointer; font-size: 0.9rem; line-height: 1; transition: color 0.2s; }
+.tag button:hover { color: #ff6b6b; }
+
+.generate-btn {
+  width: 100%;
+  padding: 18px;
+  background: linear-gradient(135deg, var(--accent2) 0%, var(--accent) 100%);
+  border: none;
+  border-radius: 16px;
+  color: #fff;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.generate-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.12));
+}
+.generate-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(196,86,42,0.4); }
+.generate-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+.generate-btn .btn-inner { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 10px; }
+
+/* ERA RULES INFO CARD */
+.rules-strip {
+  max-width: 760px;
+  margin: 0 auto 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--text3);
+  line-height: 1.8;
+  letter-spacing: 0.5px;
+  animation: slideDown 0.9s ease 0.5s backwards;
+  transition: all var(--transition);
+}
+.rules-strip .rule-ancient { color: #E8920A; }
+.rules-strip .rule-medieval { color: #4CAF50; }
+.rules-strip .rule-modern { color: #42A5F5; }
+.rules-strip strong { color: var(--text2); }
+
+/* RECIPE OUTPUT */
+.output-area {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 32px 80px;
+}
+
+.recipe-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  overflow: hidden;
+  animation: recipeReveal 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: background var(--transition);
+}
+@keyframes recipeReveal {
+  from { opacity: 0; transform: scale(0.92) translateY(30px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.recipe-header {
+  padding: 36px 36px 28px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.era-watermark {
+  position: absolute;
+  right: 32px;
+  top: 24px;
+  font-size: 5rem;
+  opacity: 0.06;
+  pointer-events: none;
+  line-height: 1;
+}
+.recipe-era-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.era-tag-ancient { background: rgba(196,86,42,0.2); color: #E8920A; border: 1px solid rgba(196,86,42,0.3); }
+.era-tag-medieval { background: rgba(76,175,80,0.15); color: #66BB6A; border: 1px solid rgba(76,175,80,0.3); }
+.era-tag-modern { background: rgba(33,150,243,0.15); color: #42A5F5; border: 1px solid rgba(33,150,243,0.3); }
+
+.recipe-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  line-height: 1.1;
+  letter-spacing: -1px;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.recipe-backstory {
+  font-size: 1rem;
+  color: var(--text2);
+  font-style: italic;
+  line-height: 1.7;
+  border-left: 3px solid var(--accent);
+  padding-left: 16px;
+  margin-top: 16px;
+}
+
+.recipe-body {
+  padding: 32px 36px;
+}
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.steps-list {
+  list-style: none;
+  margin-bottom: 32px;
+}
+.step-item {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 18px;
+  align-items: flex-start;
+  animation: stepIn 0.4s ease backwards;
+}
+@keyframes stepIn {
+  from { opacity: 0; transform: translateX(-12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.step-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 900;
+  font-size: 0.8rem;
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.step-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text);
+  padding-top: 4px;
+}
+
+.thug-tip {
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  border-radius: 20px;
+  padding: 24px 28px;
+  margin-top: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.thug-tip::before {
+  content: '🔥';
+  position: absolute;
+  right: 20px;
+  bottom: -10px;
+  font-size: 5rem;
+  opacity: 0.15;
+}
+.thug-tip-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+.thug-tip-text {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #fff;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+/* LOADING */
+.loading-state {
+  display: none;
+  text-align: center;
+  padding: 80px 24px;
+}
+.loading-state.show { display: block; }
+.loading-pot {
+  font-size: 4rem;
+  display: block;
+  margin: 0 auto 20px;
+  animation: cookSpin 1s linear infinite;
+}
+@keyframes cookSpin {
+  0% { transform: rotate(-10deg) scale(1); }
+  25% { transform: rotate(0deg) scale(1.05); }
+  50% { transform: rotate(10deg) scale(1); }
+  75% { transform: rotate(0deg) scale(0.95); }
+  100% { transform: rotate(-10deg) scale(1); }
+}
+.loading-text {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.loading-sub {
+  font-size: 0.9rem;
+  color: var(--text3);
+  font-style: italic;
+}
+.loading-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+.loading-dots span {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: dotBounce 0.9s ease-in-out infinite;
+  display: block;
+}
+.loading-dots span:nth-child(2) { animation-delay: 0.15s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes dotBounce {
+  0%, 100% { transform: translateY(0); opacity: 0.3; }
+  50% { transform: translateY(-10px); opacity: 1; }
+}
+
+/* ERROR */
+.error-box {
+  background: rgba(220, 50, 50, 0.1);
+  border: 1px solid rgba(220, 50, 50, 0.3);
+  border-radius: 16px;
+  padding: 20px 24px;
+  color: #ff8888;
+  font-size: 0.9rem;
+  text-align: center;
+  display: none;
+}
+.error-box.show { display: block; }
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 24px;
+  border-top: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text3);
+  letter-spacing: 1px;
+}
+
+@media (max-width: 640px) {
+  .header { padding: 0 16px; }
+  .hero { padding: 40px 16px 32px; }
+  .input-card { padding: 20px 16px; }
+  .recipe-header, .recipe-body { padding: 24px 20px; }
+  .output-area { padding: 0 16px 60px; }
+  .era-tabs { gap: 8px; }
+  .era-btn { min-width: 100px; padding: 12px 16px; }
+  .rules-strip { margin: 0 16px 24px; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo-wrap">
+    <span class="logo-pot">🍲</span>
+    <div>
+      <span class="logo-text">Pazhamkanji Prime</span>
+      <span class="logo-sub">Kerala's Leftover Oracle</span>
+    </div>
+  </div>
+  <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle dark/light mode">
+    <div class="toggle-ball" id="toggleBall">
+      <span id="toggleIcon">🌙</span>
+    </div>
+  </button>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="hero-badge"><span>✦</span> AI-POWERED · ERA-AUTHENTIC · MANGLISH VIBES</div>
+    <h1>
+      <span class="fire">Leftover</span> <span class="chill">aano?</span><br>
+      <span class="fire">Recipe</span> <span class="chill">ready!</span>
+    </h1>
+    <p>Upload your forgotten fridge survivors. Choose your era. Get a thug-tier recipe that'd make your ammachi proud.</p>
+
+    <!-- ERA SELECTOR -->
+    <div class="era-tabs">
+      <button class="era-btn active" data-era="ancient" onclick="selectEra('ancient')">
+        <span class="era-icon">🏺</span>
+        <span class="era-name">Ancient</span>
+        <span class="era-period">Pre-1400s</span>
+      </button>
+      <button class="era-btn" data-era="medieval" onclick="selectEra('medieval')">
+        <span class="era-icon">⚓</span>
+        <span class="era-name">Medieval</span>
+        <span class="era-period">1500s–1800s</span>
+      </button>
+      <button class="era-btn" data-era="modern" onclick="selectEra('modern')">
+        <span class="era-icon">⚗️</span>
+        <span class="era-name">Modern</span>
+        <span class="era-period">2024+</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ERA RULES STRIP -->
+  <div class="rules-strip" id="rulesStrip">
+    <span class="rule-ancient">🏺 <strong>Ancient:</strong> No tomatoes, chilies, potatoes. Black pepper = heat. Tamarind/Kokum = sour. Coconut oil only.</span> &nbsp;|&nbsp;
+    <span class="rule-medieval">⚓ <strong>Medieval:</strong> Spice trade era — vinegar, cloves, cardamom, early fusion.</span> &nbsp;|&nbsp;
+    <span class="rule-modern">⚗️ <strong>Modern:</strong> Fusion, quick-sear, Instagrammable plating, global ingredients.</span>
+  </div>
+
+  <!-- INPUT CARD -->
+  <div class="input-card" id="inputCard">
+    <h3>📦 Your Leftovers, Aliya</h3>
+
+    <!-- DROP ZONE -->
+    <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+      <input type="file" id="fileInput" accept="image/*" multiple onchange="handleFiles(event)">
+      <span class="dz-icon">📸</span>
+      <div class="dz-text">Drop food photos here or click to upload</div>
+      <div class="dz-sub">jpg, png, webp · multiple files ok</div>
+    </div>
+
+    <div class="img-previews" id="imgPreviews"></div>
+
+    <div class="ingredient-row">
+      <input
+        type="text"
+        class="ing-input"
+        id="ingInput"
+        placeholder="e.g. half carrot, yesterday's rice, lonely onion..."
+        onkeydown="if(event.key==='Enter') addTag()"
+      >
+      <button class="add-btn" onclick="addTag()">+ Add</button>
+    </div>
+
+    <div class="tags-wrap" id="tagsWrap"></div>
+
+    <button class="generate-btn" id="genBtn" onclick="generateRecipe()" disabled>
+      <span class="btn-inner">🔥 <span id="btnText">Generate My Thug Recipe</span></span>
+    </button>
+  </div>
+
+  <!-- OUTPUT -->
+  <div class="output-area">
+    <div class="loading-state" id="loadingState">
+      <span class="loading-pot">🍳</span>
+      <div class="loading-text">Nattinte swaadam thedi pookunu...</div>
+      <div class="loading-sub">Consulting ancient Kerala recipe scrolls ✨</div>
+      <div class="loading-dots"><span></span><span></span><span></span></div>
+    </div>
+
+    <div class="error-box" id="errorBox"></div>
+
+    <div id="recipeOutput"></div>
+  </div>
+</main>
+
+<footer>
+  ✦ PAZHAMKANJI PRIME · WASTELESS KITCHEN · ALIYA, ITHU POLIKKUM ✦
+</footer>
+
+<script>
+  // ─── STATE ───────────────────────────────────────────────
+  let theme = 'dark';
+  let selectedEra = 'ancient';
+  let ingredients = [];
+  let uploadedImages = [];
+
+  // ─── THEME ───────────────────────────────────────────────
+  function toggleTheme() {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.getElementById('toggleIcon').textContent = theme === 'dark' ? '🌙' : '☀️';
+  }
+
+  // ─── ERA SELECTION ────────────────────────────────────────
+  function selectEra(era) {
+    selectedEra = era;
+    document.querySelectorAll('.era-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.era-btn[data-era="${era}"]`).classList.add('active');
+  }
+
+  // ─── FILE HANDLING ────────────────────────────────────────
+  const dz = document.getElementById('dropZone');
+  dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
+  dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
+  dz.addEventListener('drop', e => {
+    e.preventDefault();
+    dz.classList.remove('drag-over');
+    handleFiles({ target: { files: e.dataTransfer.files } });
+  });
+
+  function handleFiles(e) {
+    const files = Array.from(e.target.files);
+    files.forEach(file => {
+      if (!file.type.startsWith('image/')) return;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        const nameClean = file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
+        uploadedImages.push({ name: nameClean, data: ev.target.result });
+        if (!ingredients.includes(nameClean)) {
+          ingredients.push(nameClean);
+          renderTags();
+        }
+        renderPreviews();
+        updateBtn();
+      };
+      reader.readAsDataURL(file);
+    });
+    e.target.value = '';
+  }
+
+  function renderPreviews() {
+    document.getElementById('imgPreviews').innerHTML = uploadedImages.map((img, i) =>
+      `<div class="img-preview">
+        <img src="${img.data}" alt="${img.name}">
+        <button onclick="removeImage(${i})">✕</button>
+      </div>`
+    ).join('');
+  }
+
+  function removeImage(i) {
+    uploadedImages.splice(i, 1);
+    renderPreviews();
+  }
+
+  // ─── TAGS ─────────────────────────────────────────────────
+  function addTag() {
+    const inp = document.getElementById('ingInput');
+    const val = inp.value.trim();
+    if (!val) return;
+    if (!ingredients.includes(val)) {
+      ingredients.push(val);
+      renderTags();
+      updateBtn();
+    }
+    inp.value = '';
+    inp.focus();
+  }
+
+  function removeTag(i) {
+    ingredients.splice(i, 1);
+    renderTags();
+    updateBtn();
+  }
+
+  function renderTags() {
+    document.getElementById('tagsWrap').innerHTML = ingredients.map((item, i) =>
+      `<div class="tag">🌿 ${item} <button onclick="removeTag(${i})">×</button></div>`
+    ).join('');
+  }
+
+  function updateBtn() {
+    document.getElementById('genBtn').disabled = ingredients.length === 0;
+  }
+
+  // ─── ERA ICONS ─────────────────────────────────────────────
+  const eraIcons = { ancient: '🏺', medieval: '⚓', modern: '⚗️' };
+  const eraTagClasses = { ancient: 'era-tag-ancient', medieval: 'era-tag-medieval', modern: 'era-tag-modern' };
+
+  // ─── GENERATE RECIPE VIA CLAUDE API ───────────────────────
+  async function generateRecipe() {
+    if (ingredients.length === 0) return;
+
+    document.getElementById('loadingState').classList.add('show');
+    document.getElementById('recipeOutput').innerHTML = '';
+    document.getElementById('errorBox').classList.remove('show');
+    document.getElementById('genBtn').disabled = true;
+    document.getElementById('btnText').textContent = 'Cooking...';
+
+    const eraRules = {
+      ancient: `STRICT ANCIENT RULES (Pre-1400s Kerala / Sangam Period):
+- ABSOLUTELY NO tomatoes, green chilies, red chilies, or potatoes. These did not exist in Kerala before Columbus.
+- Use BLACK PEPPER for all heat/spice.
+- Use TAMARIND or KOKUM for sourness.
+- Use only COCONUT OIL (no other oils).
+- Think clay pots, firewood cooking, banana leaf serving, rustic Sangam-period style.
+- No refined sugar; use jaggery if sweetness needed.`,
+      medieval: `STRICT MEDIEVAL RULES (1500s–1800s Kerala / Spice Trade Era):
+- This is the era of Arab traders, Portuguese, Dutch influence.
+- Introduce VINEGAR (especially coconut vinegar).
+- Heavy whole spices: cloves, cardamom, star anise, mace.
+- Early fusion is allowed — Portuguese vindaloo-style acidic cooking.
+- Coconut milk is prominent. Basic chili can appear (Portuguese brought it in 1500s).
+- Think merchant kitchens, spice trade routes, Zamorin court food.`,
+      modern: `MODERN RULES (2024+ Kerala Fusion):
+- Full global ingredient palette allowed.
+- Focus on: quick-sear techniques, minimal oil, maximum flavor.
+- Think "Instagrammable" plating, fusion twists, trendy superfoods.
+- Can reference air fryer, sous vide, fermentation, dehydration.
+- Combine Kerala flavors with global techniques (Japanese, Mediterranean, etc).
+- Output must sound like a modern food blogger AND a Kerala thug at the same time.`
+    };
+
+    const prompt = `You are the PAZHAMKANJI PRIME AI — Kerala's legendary leftover recipe oracle. You speak in Manglish (Malayalam + English mix), you're a thug who loves food, and you give MASS recipe names.
+
+USER'S LEFTOVER INGREDIENTS: ${ingredients.join(', ')}
+SELECTED ERA: ${selectedEra.toUpperCase()}
+
+${eraRules[selectedEra]}
+
+YOUR MISSION: Create ONE epic recipe using these leftover ingredients for the ${selectedEra} era.
+
+STRICT OUTPUT FORMAT (return as JSON only, no markdown, no explanation outside JSON):
+{
+  "name": "A mass thug-style recipe title (e.g. The Zamorin's Midnight Snack, Aliya's Last Stand Curry)",
+  "backstory": "One punchy sentence on why this recipe fits the ${selectedEra} era historically.",
+  "steps": [
+    "Step 1 text (include Manglish slang naturally, e.g. 'Aliya, ippol...' or 'Scene aanu, add the...')",
+    "Step 2 text",
+    "Step 3 text",
+    "Step 4 text",
+    "Step 5 text",
+    "Step 6 text"
+  ],
+  "thugTip": "Final eating/serving advice in full Manglish thug style. Use phrases like 'Aliya, ithu polikkum!', 'Oru kidu item!', 'Scene aanu!', 'mass aayitt kazhikku!', 'nattinte taste full aayitt enjoy cheyyu!'"
+}
+
+IMPORTANT: 
+- Era rules are STRICT. Ancient = NO tomato/chili/potato at all.
+- Steps should be clear and cookable.
+- Manglish should feel natural, not forced.
+- Return ONLY the JSON object. No other text.`;
+
+    try {
+      const response = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          messages: [{ role: "user", content: prompt }]
+        })
+      });
+
+      const data = await response.json();
+      const raw = data.content?.map(b => b.text || '').join('').trim();
+
+      let recipe;
+      try {
+        const jsonStr = raw.replace(/```json|```/g, '').trim();
+        recipe = JSON.parse(jsonStr);
+      } catch {
+        // fallback parse attempt
+        const match = raw.match(/\{[\s\S]+\}/);
+        if (match) recipe = JSON.parse(match[0]);
+        else throw new Error('Could not parse recipe JSON');
+      }
+
+      renderRecipe(recipe);
+    } catch (err) {
+      document.getElementById('errorBox').textContent = `Aiyo! API error: ${err.message}. Try again, aliya.`;
+      document.getElementById('errorBox').classList.add('show');
+    } finally {
+      document.getElementById('loadingState').classList.remove('show');
+      document.getElementById('genBtn').disabled = ingredients.length === 0;
+      document.getElementById('btnText').textContent = 'Generate My Thug Recipe';
+    }
+  }
+
+  function renderRecipe(recipe) {
+    const eraLabel = { ancient: 'Pre-1400s Kerala', medieval: 'Spice Trade Era 1500–1800s', modern: 'Modern 2024+' };
+    const output = document.getElementById('recipeOutput');
+
+    output.innerHTML = `
+    <div class="recipe-card">
+      <div class="recipe-header">
+        <div class="era-watermark">${eraIcons[selectedEra]}</div>
+        <div class="recipe-era-tag ${eraTagClasses[selectedEra]}">
+          ${eraIcons[selectedEra]} ${eraLabel[selectedEra]}
+        </div>
+        <h2 class="recipe-name">${recipe.name}</h2>
+        <p class="recipe-backstory">${recipe.backstory}</p>
+      </div>
+
+      <div class="recipe-body">
+        <div class="section-label">⚡ The Process</div>
+        <ol class="steps-list">
+          ${recipe.steps.map((step, i) => `
+            <li class="step-item" style="animation-delay:${i * 0.08}s">
+              <div class="step-num">${i + 1}</div>
+              <div class="step-text">${step}</div>
+            </li>
+          `).join('')}
+        </ol>
+
+        <div class="thug-tip">
+          <div class="thug-tip-label">🔥 THE THUG TIP</div>
+          <div class="thug-tip-text">${recipe.thugTip}</div>
+        </div>
+      </div>
+    </div>`;
+
+    output.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+</script>
+</body>
+</html>
