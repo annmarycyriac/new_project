@@ -99,6 +99,10 @@ Open http://localhost:8000 in your browser.
 
 *Architecture Type: Client-side SPA (Single Page Application)
 
+**Application Workflow:**
+
+
+<img width="1536" height="1024" alt="f53f38fb-5597-4462-b115-8638cbd42a61" src="https://github.com/user-attachments/assets/bcc0bc7c-083f-4459-ab31-48dc4cf1b25d" />
 
 
 
@@ -112,6 +116,7 @@ Open http://localhost:8000 in your browser.
 ## Project Demo
 
 https://drive.google.com/file/d/1yl9j5SavIeKBcMbVinzQ7nzL4JdTSN2x/view?usp=drivesdk
+
 https://github.com/user-attachments/assets/ef04c583-2ef0-4649-93a0-a0d246b9514f
 
 
